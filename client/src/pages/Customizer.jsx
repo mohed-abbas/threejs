@@ -6,13 +6,12 @@ import state from "../store"
 import {download} from "../assets"
 import { downloadCanvasToImage, reader } from "../config/helpers"
 import {EditorTabs, FilterTabs, DecalTypes} from "../config/constants"
-
+ 
 import {fadeAnimation, slideAnimation} from "../config/motion"
 import {CustomButton, AIpicker, FilePicker, ColorPicker, Tab} from "../components"
 
 const Customizer = () => {
   const snap = useSnapshot(state)
-
   const [file, setFile] = useState('');
   const [prompt, setprompt] = useState('');
   const [generatingImg, setgeneratingImg] = useState(false);
@@ -49,6 +48,20 @@ const Customizer = () => {
 
     try {
       // call to our backend tocall the openAi api to get the image.
+      setgeneratingImg(true);
+      const response = await fetch('http://localhost:8080/api/v1/dalle', 
+      {
+        method: 'post',
+        headers:{
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          prompt,
+        })
+      })
+
+      const data = await response.json()
+      handleDecals(type, `data:image/png;base64,${data.photo}`)
     } catch (error) {
       alert(error)
     }  finally {
@@ -58,7 +71,6 @@ const Customizer = () => {
   }
 
   const handleDecals = (type, result) => {
-
     const decalType = DecalTypes[type]
     state[decalType.stateProperty] = result;
     if(!activeFilterTab[decalType.filterTab]){ 
