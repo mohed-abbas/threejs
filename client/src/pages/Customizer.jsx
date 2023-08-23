@@ -1,5 +1,5 @@
-import React , {useState, useEffect} from "react"
-import {useSnapshot} from "valtio"
+import React , {useState, useEffect, useRef} from "react"
+import {ref, useSnapshot} from "valtio"
 import {AnimatePresence , motion} from "framer-motion"
 import config from "../config/config"
 import state from "../store"
@@ -20,12 +20,18 @@ const Customizer = () => {
     logoShirt: true,
     stylishShirt: false
   });
-  // Show tqb content depending on selected tab
+
+
+  const [menuOpen, setmenuOpen] = useState(false)
+
+
+  // Show tab content depending on selected tab
   const generateTabContent = () => {
+    if (!menuOpen) return
     switch (activeEditorTab) {
       case 'colorpicker':
         return <ColorPicker/>
-      case 'filepicker':
+        case 'filepicker':
         return <FilePicker
           file={file}
           setFile={setFile}
@@ -42,6 +48,17 @@ const Customizer = () => {
         return null;
     }
   }
+
+
+
+  const handler = () => {
+    if (menuOpen == false) {
+      setmenuOpen(true)
+    }else {
+      setmenuOpen(false)
+    }
+  }
+  
 
   const handleSubmit = async (type) => {
     if (!prompt) return alert('Please enter a prompt')
@@ -119,7 +136,10 @@ const Customizer = () => {
                   <Tab 
                   key={tab.name}
                   tab={tab}
-                  handleClick={() => setactiveEditorTab(tab.name)}
+                  handleClick={() => {
+                    setactiveEditorTab(tab.name)
+                    handler()
+                    }}
                   />
                   ))}
                   {generateTabContent()}

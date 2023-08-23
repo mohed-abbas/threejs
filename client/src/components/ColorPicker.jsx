@@ -4,7 +4,7 @@ import state from '../store'
 
 const ColorPicker = () => {
   const snap = useSnapshot(state)
-  console.log(state)
+
   return (
     <div className='absolute left-full ml-3'>
       <SketchPicker 

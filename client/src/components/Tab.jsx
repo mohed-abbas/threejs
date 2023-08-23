@@ -7,6 +7,7 @@ const Tab = ({tab, isFilterTab, isActivTab, handleClick}) => {
   ? {backgroundColor: snap.color, opacity:0.5}
   : {backgroundColor:"transparent" , opacity:1}
   return (
+    <div>
     <div
     key={tab.name}
     className={`tab-btn ${isFilterTab} ? 'rounded-full glassmorphism' : 'rounded-4'`}
@@ -18,6 +19,7 @@ const Tab = ({tab, isFilterTab, isActivTab, handleClick}) => {
         alt={tab.name}
         className={`${isFilterTab} ? 'w-2/3 h-2/3' : 'w-11/12 h-11/12 object-contain'`}
       />
+    </div>
     </div>
   )
 }
