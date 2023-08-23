@@ -30,7 +30,14 @@ const BackDrop = () => {
       radius={7}
       intensity={0.75}
       ambient={0.5}
-      position={[-5, 5, -9]}
+      position={[-5, 5, 7]}
+      />
+      <RandomizedLight 
+      amount={5}
+      radius={10}
+      intensity={1}
+      ambient={0.5}
+      position={[-0, 0, 0]}
       />
     </AccumulativeShadows>
   )

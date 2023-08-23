@@ -12,7 +12,7 @@ const CanvasModel = () => {
     gl={{preserveDrawingBuffer: true}}
     className="w-full max-w-full h-full transition-all easi-in"
     >
-      <ambientLight intensity={0.5}/>
+      <ambientLight intensity={0.65}/>
       <Environment preset="city"/>
       <CameraRig>
         <Backdrop/>
