@@ -28,7 +28,7 @@ html {
 }
 
 .head-text {
-  @apply xl:text-[8rem] text-[6rem] xl:leading-[8rem] leading-[5rem] font-black text-white;
+  @apply xl:text-[8rem] sm:text-[6rem] text-[4rem] xl:leading-[8rem] leading-[5rem] font-black text-white;
 }
 
 .download-btn {

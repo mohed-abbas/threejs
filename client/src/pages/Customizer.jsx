@@ -5,7 +5,7 @@ import config from "../config/config"
 import state from "../store"
 import {download} from "../assets"
 import { downloadCanvasToImage, reader } from "../config/helpers"
-import {EditorTabs, FilterTabs, DecalTypes} from "../config/constants"
+import {EditorTabs, FilterTabs, DecalTypes, downloadTab} from "../config/constants"
  
 import {fadeAnimation, slideAnimation} from "../config/motion"
 import {CustomButton, AIpicker, FilePicker, ColorPicker, Tab} from "../components"
@@ -37,13 +37,13 @@ const Customizer = () => {
           setFile={setFile}
           readfile={readfile}
         />
-      case 'aipicker':
-        return <AIpicker
-          prompt={prompt}
-          setprompt={setprompt}
-          generatingImg={generatingImg}
-          handleSubmit={handleSubmit}
-        />
+      // case 'aipicker':
+      //   return <AIpicker
+      //     prompt={prompt}
+      //     setprompt={setprompt}
+      //     generatingImg={generatingImg}
+      //     handleSubmit={handleSubmit}
+      //   />
       default:
         return null;
     }
@@ -124,6 +124,8 @@ const Customizer = () => {
     })
   }
 
+  
+
   return (
     <AnimatePresence>
       {!snap.intro && (
@@ -164,6 +166,12 @@ const Customizer = () => {
               handleClick={() => handleActiveFilterTab(tab.name)}  
               />
             ))}
+            <Tab
+              key="Download"
+              tab={downloadTab}
+              isFilterTab
+              handleClick={() => downloadCanvasToImage()}
+            />
         </motion.div>
         </>
       )}
